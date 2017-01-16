@@ -36,3 +36,8 @@
 .list {
   width:400px;
 }
+
+.angular-google-map-container {
+  height: 100%;
+  width: 100%;
+}

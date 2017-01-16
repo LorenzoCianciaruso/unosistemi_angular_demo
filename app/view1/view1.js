@@ -9,21 +9,49 @@ angular.module('myApp.view1', ['ngRoute'])
   });
 }])
 
-.controller('View1Ctrl', ['$scope', '$http', 'earthquakes', '$sce',
-function($scope, $http, earthquakes, $sce) {
+.controller('View1Ctrl', ['$scope', '$http', 'earthquakes',
+function($scope, $http, earthquakes) {
+
   earthquakes.get().then(function(response){
     $scope.earthquakes_location = response.data.results;
+
+    var mapOptions = {
+      zoom: 4,
+      center: new google.maps.LatLng($scope.earthquakes_location[0].latitude, $scope.earthquakes_location[0].longitude),
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+    }
+
+    $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    for (var i = 0; i < $scope.earthquakes_location.length; i++){
+      createMarker($scope.earthquakes_location[i]);
+    }
+
   });
 
-  var baseURL = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCuFfrSGEpLcNpNJo9PU4_ehsIULYmvZQc&q=Iceland';
+  var createMarker = function (info){
+    var marker = new google.maps.Marker({
+      map: $scope.map,
+      position: new google.maps.LatLng(info.latitude, info.longitude),
+      title: info.humanReadableLocation,
+      size: info.size,
+      depth: info.depth,
+      timestamp: info.timestamp
+    });
 
-  $scope.center = $sce.trustAsResourceUrl(baseURL);
+    var infoWindow = new google.maps.InfoWindow();
 
-  $scope.select = function(index){
-    var URL = baseURL +
-    $scope.earthquakes_location[index].latitude+','+
-    $scope.earthquakes_location[index].longitude;
+    marker.content = '<div class="infoWindowContent">' + info.depth + '</div>';
 
-    $scope.center = $sce.trustAsResourceUrl(URL);
-  };
+    google.maps.event.addListener(marker, 'click', function(){
+      infoWindow.setContent('<h2>' + marker.size + '</h2>' + marker.timestamp);
+      infoWindow.open($scope.map, marker);
+    });
+  }
+
+  $scope.openInfoWindow = function(e, selectedMarker){
+    e.preventDefault();
+    google.maps.event.trigger(selectedMarker, 'click');
+  }
+
 }]);
