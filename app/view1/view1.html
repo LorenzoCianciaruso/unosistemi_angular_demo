@@ -1,11 +1,17 @@
-<div id="map"></div>
-<ul class="list">
-  <li ng-repeat="earthquake in earthquakes_location" ng-click="openInfoWindow($event, earthquake)">
-    <div class="tile">
-      <span class="timestamp">{{earthquake.timestamp}}</span>
-      <span class="location">{{earthquake.humanReadableLocation}}</span>
-      <span class="depth">{{earthquake.depth}}</span>
-      <span class="size">{{earthquake.size}}</span>
+<div>
+    <div style="float: left; width: 400;">
+      <ul class="list">
+        <li ng-repeat="earthquake in markers" ng-click="openInfoWindow($event, earthquake)">
+          <div class="tile">
+            <span class="timestamp">{{earthquake.timestamp}}</span>
+            <span class="location">{{earthquake.humanReadableLocation}}</span>
+            <span class="depth">{{earthquake.depth}}</span>
+            <span class="size">{{earthquake.size}}</span>
+          </div>
+        </li>
+      </ul>
     </div>
-  </li>
-</ul>
+    <div>
+      <div id="map"></div>
+    </div>
+</div>

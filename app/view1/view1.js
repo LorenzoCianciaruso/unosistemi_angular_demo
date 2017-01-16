@@ -13,10 +13,11 @@ angular.module('myApp.view1', ['ngRoute'])
 function($scope, $http, earthquakes) {
 
   earthquakes.get().then(function(response){
+    $scope.markers = [];
     $scope.earthquakes_location = response.data.results;
 
     var mapOptions = {
-      zoom: 4,
+      zoom: 6,
       center: new google.maps.LatLng($scope.earthquakes_location[0].latitude, $scope.earthquakes_location[0].longitude),
       mapTypeId: google.maps.MapTypeId.TERRAIN
     }
@@ -24,7 +25,7 @@ function($scope, $http, earthquakes) {
     $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
     for (var i = 0; i < $scope.earthquakes_location.length; i++){
-      createMarker($scope.earthquakes_location[i]);
+      $scope.markers.push(createMarker($scope.earthquakes_location[i]));
     }
 
   });
@@ -36,21 +37,23 @@ function($scope, $http, earthquakes) {
       title: info.humanReadableLocation,
       size: info.size,
       depth: info.depth,
-      timestamp: info.timestamp
+      timestamp: info.timestamp,
+      humanReadableLocation: info.humanReadableLocation
     });
 
     var infoWindow = new google.maps.InfoWindow();
 
     marker.content = '<div class="infoWindowContent">' + info.depth + '</div>';
 
-    google.maps.event.addListener(info, 'click', function(){
+    google.maps.event.addListener(marker, 'click', function(){
       infoWindow.setContent('<h2>' + marker.size + '</h2>' + marker.timestamp);
       infoWindow.open($scope.map, marker);
     });
+
+    return marker;
   }
 
   $scope.openInfoWindow = function(e, selectedMarker){
-    console.log("openInfoWindow");
     e.preventDefault();
     google.maps.event.trigger(selectedMarker, 'click');
   }
