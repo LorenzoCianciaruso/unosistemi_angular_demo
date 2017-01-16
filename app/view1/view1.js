@@ -9,6 +9,10 @@ angular.module('myApp.view1', ['ngRoute'])
   });
 }])
 
-.controller('View1Ctrl', [function() {
+.controller('View1Ctrl', ['$scope', '$http', 'earthquakes', function($scope, $http, earthquakes) {
+  earthquakes.get().then(function(response){
+    $scope.earthquakes_location = response.data.results;
+  });
 
+  
 }]);
