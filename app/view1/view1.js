@@ -43,13 +43,14 @@ function($scope, $http, earthquakes) {
 
     marker.content = '<div class="infoWindowContent">' + info.depth + '</div>';
 
-    google.maps.event.addListener(marker, 'click', function(){
+    google.maps.event.addListener(info, 'click', function(){
       infoWindow.setContent('<h2>' + marker.size + '</h2>' + marker.timestamp);
       infoWindow.open($scope.map, marker);
     });
   }
 
   $scope.openInfoWindow = function(e, selectedMarker){
+    console.log("openInfoWindow");
     e.preventDefault();
     google.maps.event.trigger(selectedMarker, 'click');
   }
