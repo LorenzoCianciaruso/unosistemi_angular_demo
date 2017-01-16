@@ -9,10 +9,21 @@ angular.module('myApp.view1', ['ngRoute'])
   });
 }])
 
-.controller('View1Ctrl', ['$scope', '$http', 'earthquakes', function($scope, $http, earthquakes) {
+.controller('View1Ctrl', ['$scope', '$http', 'earthquakes', '$sce',
+function($scope, $http, earthquakes, $sce) {
   earthquakes.get().then(function(response){
     $scope.earthquakes_location = response.data.results;
   });
 
-  
+  var baseURL = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCuFfrSGEpLcNpNJo9PU4_ehsIULYmvZQc&q=Iceland';
+
+  $scope.center = $sce.trustAsResourceUrl(baseURL);
+
+  $scope.select = function(index){
+    var URL = baseURL +
+    $scope.earthquakes_location[index].latitude+','+
+    $scope.earthquakes_location[index].longitude;
+
+    $scope.center = $sce.trustAsResourceUrl(URL);
+  };
 }]);

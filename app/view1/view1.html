@@ -1,8 +1,24 @@
-<iframe
-  frameborder="0"
-  style="border:0"
-  width="1400"
-  height="600"
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCuFfrSGEpLcNpNJo9PU4_ehsIULYmvZQc"
-  allowfullscreen>
-</iframe>
+<div class="row">
+  <div class="column">
+    <ul class="list">
+      <li ng-repeat="earthquake in earthquakes_location">
+        <div class="tile" ng-click="select($index)">
+          <span class="timestamp">{{earthquake.timestamp}}</span>
+          <span class="location">{{earthquake.humanReadableLocation}}</span>
+          <span class="depth">{{earthquake.depth}}</span>
+          <span class="size">{{earthquake.size}}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="column">
+    <iframe
+    frameborder="0"
+    style="border:0"
+    width="100%"
+    height="100%"
+    ng-src="{{center}}"
+    allowfullscreen>
+  </iframe>
+  </div>
+</div>
