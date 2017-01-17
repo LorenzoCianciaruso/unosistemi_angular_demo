@@ -1,13 +1,8 @@
 <div>
     <div style="float: left; width: 400;">
-      <ul class="list">
+      <ul class="double-column">
         <li ng-repeat="earthquake in markers" ng-click="openInfoWindow($event, earthquake)">
-          <div class="tile">
-            <span class="timestamp">{{earthquake.timestamp}}</span>
-            <span class="location">{{earthquake.humanReadableLocation}}</span>
-            <span class="depth">{{earthquake.depth}}</span>
-            <span class="size">{{earthquake.size}}</span>
-          </div>
+          <tile earthquake="earthquake"></tile>
         </li>
       </ul>
     </div>

@@ -24,7 +24,26 @@
   padding-right: 0.3em;
 }
 
+ul.double-column {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+  list-style-type: none;
+  margin: 0px;
+}
+
+.tile {
+  cursor: pointer;
+  border: 1px solid black;
+  margin: 2px;
+}
+
+h5.small-text {
+  font-size:10px;
+  margin: 3px;
+}
+
 #map {
-    height:800px;
-    width:1000px;
+  height:800px;
+  width:1000px;
 }
