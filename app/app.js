@@ -7,6 +7,7 @@ angular.module('myApp', [
   'myApp.view2',
   'myApp.earthquakes',
   'myApp.earthTile',
+  'myApp.validation',
   'myApp.version'
 ])
 .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {

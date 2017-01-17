@@ -9,6 +9,24 @@ angular.module('myApp.view2', ['ngRoute'])
   });
 }])
 
-.controller('View2Ctrl', [function() {
+.controller('View2Ctrl', ['$scope', '$interval', 'validator', function($scope, $interval, validator) {
+
+  $scope.validation = function(){
+    $scope.message = null;
+    var res = validator.validate($scope.user);
+
+    if(res){
+      $scope.message = 'All good';
+    }else{
+      $scope.message = 'Validation error';
+    }
+  }
+
+  var reset = function(){
+    console.log('resetting');
+    $scope.user = {};
+  }
+
+  $interval(reset, 30000);
 
 }]);
