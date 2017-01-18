@@ -13,7 +13,6 @@ angular.module('myApp.view2', ['ngRoute'])
 function($scope, $interval, validator) {
 
   $scope.validation = function(){
-    $scope.message = null;
     var res = validator.validate($scope.user);
 
     if(res){
@@ -25,7 +24,8 @@ function($scope, $interval, validator) {
 
   var reset = function(){
     console.log('resetting');
-    $scope.user = {};
+    $scope.user = null;
+    $scope.message = null;
   }
 
   $interval(reset, 30000);
