@@ -60,7 +60,7 @@ describe('myApp.validation module', function() {
 
   describe('when I call the validate function with good data', function(){
     beforeEach(module('myApp.validation'));
-    it('should fail', inject(function(validator){
+    it('should succeed', inject(function(validator){
       expect( validator.validate({name: 'Lorenzo', surname: 'Cianciaruso', year:1990}) ).toEqual(true);
     }))
   });

@@ -6,7 +6,7 @@ angular.module("myApp.earthTile", [])
         restrict : 'E',
         templateUrl : 'directive/templates/earth-tile.html',
         scope: {
-          earthquake: '='
+          earthquake: '=earthquakeData'
         }
     };
 });

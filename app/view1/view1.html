@@ -1,8 +1,8 @@
 <div>
-    <div style="float: left; width: 400;">
+    <div style="float: left; width: 400px;">
       <ul class="double-column">
         <li ng-repeat="earthquake in markers" ng-click="openInfoWindow($event, earthquake)">
-          <tile earthquake="earthquake"></tile>
+          <tile earthquake-data="earthquake"></tile>
         </li>
       </ul>
     </div>

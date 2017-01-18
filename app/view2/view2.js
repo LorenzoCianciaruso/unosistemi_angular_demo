@@ -9,7 +9,8 @@ angular.module('myApp.view2', ['ngRoute'])
   });
 }])
 
-.controller('View2Ctrl', ['$scope', '$interval', 'validator', function($scope, $interval, validator) {
+.controller('View2Ctrl', ['$scope', '$interval', 'validator',
+function($scope, $interval, validator) {
 
   $scope.validation = function(){
     $scope.message = null;
